@@ -1,0 +1,313 @@
+﻿<!doctype html>
+<html class="no-js">
+<head>
+    @using fakebook.Models
+    @model LocationModel
+    <meta charset="UTF-8">
+    <title>Text | FakeBook</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <!--link rel="alternate icon" type="image/png" href="assets/i/favicon.png"-->
+    <link rel="stylesheet" href="@Url.Content("~/Assets/css/amazeui.min.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Assets/css/admin.css")" />
+    <style>
+        .header {
+            text-align: center;
+        }
+
+            .header h1 {
+                font-size: 200%;
+                color: #333;
+                margin-top: 30px;
+            }
+
+            .header p {
+                font-size: 14px;
+            }
+
+        #borderColorCorner {
+            border: 10px solid #dedede;
+        }
+
+        padding: 15px 25px; 　　 height: inherit; 　　 width: 590px; 　　
+        }
+    </style>
+</head>
+<body>
+    <header class="am-topbar admin-header" style="background-color: #1E5B94">
+        <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+        <div class="am-collapse am-topbar-collapse am-u-md-6" id="topbar-collapse">
+            <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-middle admin-header-list">
+                <li>
+                    <a href="UserPage">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            主页
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Text">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            朋友圈
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../Album/Gallery">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            相册
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../Topic/Index">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            话题
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Chatroom">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            多人聊天室
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="PeopleAround" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                        <span class="am-icon-man-o">
+                            附近的人
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#friend-side-bar" data-am-offcanvas>
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            小伙伴们
+                        </span>
+                    </a>
+                </li>
+
+            </ul>
+            <form class="am-topbar-form am-u-md-4 am-u-sm-10">
+                <div class="">
+                    <div class="am-input-group am-input-group-primary">
+                        <span class="am-input-group-btn">
+                            <a href="Search"><button class="am-btn am-btn-primary search-button" type="button"><span class="am-icon-search"></span></button></a>
+                        </span>
+                    </div>
+                </div>
+            </form>
+
+
+
+        </div>
+
+
+    </header>
+
+
+
+
+
+
+
+    <style type="text/css">
+        body, html, #allmap {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+    </style>
+    <script type="text/javascript" src="@Url.Content("http://api.map.baidu.com/api?v=2.0&ak=D665ac6ae68f83f16fac0c2e10f09de5")"></script>
+    <title>可视区域内的搜素</title>
+    </head>
+    <body>
+        <div id="allmap"></div>
+    </body>
+</html>
+<script type="text/javascript">
+
+    // 百度地图API功能
+
+
+
+    var map = new BMap.Map("allmap");
+    var latitude;
+    var longitude;
+
+    window.navigator.geolocation.getCurrentPosition(function (pos) {
+        latitude = pos.coords.latitude;
+        longitude = pos.coords.longitude;
+        map.centerAndZoom(new BMap.Point(longitude, latitude), 16);
+        $.post('SendLocation', { longitude: longitude, latitude: latitude }, function (data) { console.log("addFriend: " + data); });
+        //socket.emit("sendPositionToServer", { username: "<%=username%>", longitude: longitude, latitude: latitude });
+    });
+
+
+
+    function ComplexCustomOverlay(point, text, mouseoverText, user_id) {
+        this._point = point;
+        this._text = text;
+        this._overText = mouseoverText;
+        this._user_id = user_id;
+    }
+    ComplexCustomOverlay.prototype = new BMap.Overlay();
+    ComplexCustomOverlay.prototype.initialize = function (map) {
+        this._map = map;
+        var div = this._div = document.createElement("div");
+        div.style.position = "absolute";
+        div.style.zIndex = BMap.Overlay.getZIndex(this._point.lat);
+
+        div.style.backgroundColor = "#EE5D5B";
+        div.style.border = "1px solid #BC3B3A";
+        div.style.color = "white";
+        div.style.height = "18px";
+        div.style.padding = "2px";
+        div.style.lineHeight = "18px";
+        div.style.whiteSpace = "nowrap";
+        div.style.MozUserSelect = "none";
+        div.style.fontSize = "12px"
+        var span = this._span = document.createElement("span");
+        div.appendChild(span);
+        span.appendChild(document.createTextNode(this._text));
+        var that = this;
+
+        var arrow = this._arrow = document.createElement("div");
+        arrow.style.background = "url(@Url.Content("http://map.baidu.com/fwmap/upload/r/map/fwmap/static/house/images/label.png) no-repeat")";
+        arrow.style.position = "absolute";
+        arrow.style.width = "11px";
+        arrow.style.height = "10px";
+        arrow.style.top = "22px";
+        arrow.style.left = "10px";
+        arrow.style.overflow = "hidden";
+        div.appendChild(arrow);
+
+        var imgDiv = document.createElement("div");
+        var img = document.createElement("img");
+        var button = document.createElement("button");
+        button.setAttribute("class", "am-btn am-btn-primary am-u-sm-12");
+        button.innerHTML = "添加+";
+
+        /*
+        var nickname = pressedBtn.getAttribute('data-nickname');
+        $.post ('/friendAdder', {user_id: id, user_nickname: nickname}, function (data) {console.log ("addFriend: " + data);});
+        alert ('已向' + pressedBtn.getAttribute('data-id') + '申请好友');
+        */
+        button.onclick = function () {
+            $.post('AddFromMap', {friendname: that._user_id}, function (data) { console.log("addFriend: " + data); });
+            alert("已向" + that._user_id + "申请好友");
+        }
+
+        img.setAttribute('class', 'am-img-circle am-img-thumbnail am-u-sm-12');
+        img.setAttribute('src', 'head_imgs/head_test.png');
+        imgDiv.appendChild(img);
+        imgDiv.appendChild(button);
+        imgDiv.style.visibility = 'hidden';
+        div.appendChild(imgDiv)
+
+        div.onmouseover = function () {
+            imgDiv.style.visibility = 'visible';
+            div.style.zIndex = 999;
+            this.style.backgroundColor = "#6BADCA";
+            this.style.borderColor = "#0000ff";
+            this.getElementsByTagName("span")[0].innerHTML = that._overText;
+            arrow.style.backgroundPosition = "0px -20px";
+        }
+
+        div.onmouseout = function () {
+            imgDiv.style.visibility = 'hidden';
+            div.style.zIndex = 0;
+            this.style.backgroundColor = "#EE5D5B";
+            this.style.borderColor = "#BC3B3A";
+            this.getElementsByTagName("span")[0].innerHTML = that._text;
+            arrow.style.backgroundPosition = "0px 0px";
+        }
+
+        map.getPanes().labelPane.appendChild(div);
+
+        return div;
+    }
+
+    ComplexCustomOverlay.prototype.draw = function () {
+        var map = this._map;
+        var pixel = map.pointToOverlayPixel(this._point);
+        this._div.style.left = pixel.x - parseInt(this._arrow.style.left) + "px";
+        this._div.style.top = pixel.y - 30 + "px";
+    }
+
+
+
+
+
+
+
+
+
+    function showPeopleAround(peoples) {
+        for (var i = 0; i < peoples.length; ++i) {
+            var labelPoint = new BMap.Point(peoples[i].longitude, peoples[i].latitude);
+            var compOverlay = new ComplexCustomOverlay(labelPoint, peoples[i].username, peoples[i].username, peoples[i].username);
+            map.addOverlay(compOverlay);
+        }
+    }
+
+    //map.centerAndZoom(new BMap.Point(longitude, latitude), 14);
+
+    var local = new BMap.LocalSearch(map, {
+        renderOptions: { map: map }
+    });
+
+    function init() {
+        var count = @ViewBag.count;
+        var peopleList = [];
+        var people = "@ViewBag.peopleListStr".split(" ");
+        for (var i = 0; i < count; ++i) {
+            var j = i * 3;
+            peopleList.push({
+                username: people[j],
+                longitude: people[j + 1],
+                latitude: people[j + 2]
+            });
+            console.log(peopleList[i]);
+        }
+        showPeopleAround(peopleList);
+        //alert(people);
+    }
+
+    window.onload = init;
+
+</script>
+
+
+
+
+
+
+<footer class="footer">
+    <br />
+    <hr>
+    <p class="am-padding-left" align=center>fakebook Tongji</p>
+</footer>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="assets/js/polyfill/rem.min.js"></script>
+<script src="assets/js/polyfill/respond.min.js"></script>
+<script src="assets/js/amazeui.legacy.js"></script>
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="@Url.Content("~/Assets/js/jquery.min.js")"></script>
+<script src="@Url.Content("~/Assets/js/amazeui.min.js")"></script>
+<script>
+
+
+</script>
+<!--<![endif]-->
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Amaze UI Admin user Examples</title>
+  <meta name="description" content="这是一个 user 页面">
+  <meta name="keywords" content="user">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--  <link rel="icon" type="image/png" href="assets/i/favicon.png">-->
+<!--  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">-->
+  <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+<!--  <link rel="stylesheet" href="assets/css/amazeui.min.css"/>-->
+<!--  <link rel="stylesheet" href="assets/css/admin.css">-->
+  <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.3.0/css/amazeui.min.css"/>
+</head>
+<body>
+<!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+  以获得更好的体验！</p>
+<![endif]-->
+
+<header class="am-topbar admin-header">
+  <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+
+  <div class="am-collapse am-topbar-collapse am-u-md-6" id="topbar-collapse">
+
+    <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-middle admin-header-list">
+
+      <li>
+        <a href="/userPage">
+          <span class="am-icon-man-o">
+            主页
+          </span>
+        </a>
+      </li>
+
+      <li>
+        <a href="/state">
+          <span class="am-icon-man-o">
+            状态
+          </span>
+        </a>
+      </li>
+
+      <li>
+        <a href="/gallery">
+          <span class="am-icon-man-o">
+            相册
+          </span>
+        </a>
+      </li>
+
+      <li>
+        <a href="/chat">
+          <span class="am-icon-man-o">
+            多人聊天室
+          </span>
+        </a>
+      </li>
+
+      <li>
+        <a href="/peopleAround">
+          <span class="am-icon-man-o">
+            附近的人
+          </span>
+        </a>
+      </li>
+
+      <li>
+        <a href="#friend-side-bar" data-am-offcanvas>
+          <span class="am-icon-man-o">
+            小伙伴们
+          </span>
+        </a>
+      </li>
+
+
+
+    </ul>
+    <form action="/search" method="post" class="am-topbar-form am-u-md-4 am-u-sm-10">
+    <div class="">
+      <div class="am-input-group am-input-group-primary">
+          <input type="text" class="am-form-field search-field" name="friend" id="friend" placeholder="寻找小伙伴">
+          <span class="am-input-group-btn">
+            <button class="am-btn am-btn-primary search-button" type="submit"><span class="am-icon-search"></span></button>
+          </span>
+      </div>
+    </div>
+    </form>
+
+
+    <div class="am-topbar-right">
+      <div class="am-dropdown" data-am-dropdown="{boundary: '.am-topbar'}">
+        <button class="am-btn am-btn-secondary am-topbar-btn am-btn-sm am-dropdown-toggle" data-am-dropdown-toggle>通知 <span class="am-icon-caret-down"></span></button>
+        <ul class="am-dropdown-content notificationList">
+          <li class="am-dropdown-header">通知</li>
+          <li><a href="/friendManagement">处理好友请求</a></li>
+        </ul>
+      </div>
+    </div>
+
+
+
+  </div>
+
+
+
+
+</header>
+
+<!--TEST start-->
+
+<!--TEST end-->
+
+
+<div class="am-cf admin-main">
+
+  <!-- content start -->
+  <div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">状态</strong> / <small>State</small></div>
+      <div class="am-fr am-cf">
+        <input type="button" class="statebutton modify-button am-btn am-btn-primary am-fr am-show-sm-only" value="State"
+        data-am-collapse="{target: '#statefield-collapse'}"></div>
+
+<!--button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button-->
+
+
+    </div>
+    <hr/>
+    <div class="am-collapse am-topbar-collapse" id="statefield-collapse">
+    <span class="statetextarea">
+      <div class="am-u-md-12" align=center>
+          <textarea name="state" class="stateArea am-u-sm-12" rows="5" cols="50"id="state" placeholder="say something"></textarea>
+          <input type="button" class="statesendbutton modify-button am-btn am-btn-primary am-u-sm-12" value="Send">
+      </div>
+    </span>
+    </div>
+
+
+      <div class="am-u-md-12">
+        <ul class="am-comments-list" id="statelist">
+        </ul>
+      </div>
+
+
+
+    <hr/>
+  </div>
+  <!-- content end -->
+</div>
+
+<a class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+
+<footer>
+  <br/>
+  <hr>
+  <p class="am-padding-left" align=center>fakebook Tongji</p>
+</footer>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="assets/js/polyfill/rem.min.js"></script>
+<script src="assets/js/polyfill/respond.min.js"></script>
+<script src="assets/js/amazeui.legacy.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src = "//libs.cdnjs.net/jquery/2.1.1/jquery.min.js"></script>
+<!-- <script src="assets/js/jquery.min.js"></script> -->
+<script src="assets/js/amazeui.min.js"></script>
+<!--<![endif]-->
+<script src="assets/js/app.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+  var socket = io ();
+  var statesArray = [];
+  socket.on ('connect', function () {
+    socket.emit ('gethistorystates', {some: 'data'});
+  });
+
+  socket.on ('gethistorystatesfromserver', function (data) {
+    console.log (data);
+    statesArray = data;
+    initStates ();
+  });
+
+
+  $('.statebutton').click (function () {
+    console.log ('statebutton');
+  });
+
+
+  $('.statesendbutton').click(function (){
+    if ($('.stateArea').val() === '') {
+
+    } else {
+      $.post(
+        '/sendState',
+        {
+          state: $('.stateArea').val ()
+        },
+        function (data) //回传函数
+        {
+
+        }
+      );
+      document.getElementById ("statelist").innerHTML = "";
+      statesArray.push ($('.stateArea').val ());
+      initStates ();
+      $('.stateArea').val ('');
+    }
+   });
+
+  function addStates (state) {
+    td = document.getElementById("statelist");
+    var stateObj = document.createElement("li");
+    stateObj.setAttribute("class", "am-comment");
+    var div1 = document.createElement("div");
+    div1.setAttribute("class", "am-comment-main");
+    var div2 = document.createElement("div");
+    div2.setAttribute("class", "am-comment-bd");
+    var p = document.createElement("p");
+    p.innerText = state;
+    div2.appendChild(p);
+    div1.appendChild(div2);
+    stateObj.appendChild(div1);
+    td.appendChild (stateObj);
+  }
+
+  function initStates () {
+    for (var i = statesArray.length - 1; i >= 0; i--) {
+      addStates (statesArray[i]);
+    }
+  }
+
+</script>
+</body>
+</html>

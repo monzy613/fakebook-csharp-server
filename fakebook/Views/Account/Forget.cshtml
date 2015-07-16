@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Forget Password Page<%=title%></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <!--link rel="alternate icon" type="image/png" href="assets/i/favicon.png"-->
+    <link rel="stylesheet" href="@Url.Content("~/Assets/css/amazeui.min.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Assets/css/admin.css")" />
+    <style>
+        .header {
+            text-align: center;
+        }
+
+            .header h1 {
+                font-size: 200%;
+                color: #333;
+                margin-top: 30px;
+            }
+
+            .header p {
+                font-size: 14px;
+            }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="am-g am-u-sm-4 am-u-sm-centered">
+            <h2>Forget Password</h2>
+            <a href="/"><img class="am-u-sm-4 am-u-sm-centered" src="logo/fakebook_logo.png"></a>
+        </div>
+        <hr />
+    </div>
+
+    <div class="am-g">
+        <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+            <br>
+            <form action="Forget" ng-app="" ng-controller="validateController" method="post" class="am-form" name="myForm">
+
+              
+
+
+
+                <label class="alertLabel"></label>
+                <label for="email">*账号:</label>
+                <input  name="username" id="username" value="" ng-model="username" required placeholder="输入账号">
+                <br/>
+                <span style="color: "#333333" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+                    输入你的账号，密码将发进你注册的邮箱
+                </span><br /><br/><br/>
+
+                <div class="am-cf">
+                    <input type="submit" name="" id="submitButton" value="提交" class="am-btn am-btn-primary am-btn-sm am-fl" ng-disabled="myForm.nickname.$invalid || myForm.username.$invalid || (myForm.cpassword.$modelValue != myForm.password.$modelValue) || myForm.password.$invalid || myForm.email.$invalid">
+                </div>
+            </form>
+            <hr>
+            <footer class="footer">
+                <br />
+                <hr>
+                <p class="am-padding-left" align=center>fakebook Tongji</p>
+            </footer>
+        </div>
+    </div>
+
+    <script src="@Url.Content("~/Assets/js/angular.min.js")"></script>
+    <script>
+        function validateController($scope) {
+            $scope.username;
+            $scope.password;
+            $scope.cpassword;
+            $scope.email;
+        }
+    </script>
+</body>
+</html>

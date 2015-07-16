@@ -1,0 +1,181 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <link rel="stylesheet" href="@Url.Content("~/Assets/css/amazeui.min.css")"/>
+    <link rel="stylesheet" href="@Url.Content("~/Assets/css/admin.css")"/>
+    <title>Websocket client</title>
+    <script type="text/javascript">
+    
+    
+    
+    
+         function send() {
+            var input = document.getElementById('sendText');
+            var val = input.value;
+            if(val !== "") {
+				var sendStr = "{\"username\":\"" + @ViewBag.username
+                            + "\",\"nickname\":\"" + @ViewBag.nickname
+                            + "\",\"content\":\"" + val
+                            + "\"}";
+				ws.send(sendStr);
+				input.value = ""; 
+            }                
+        }   
+        
+        
+        
+    
+    
+        var start = function () {
+            var inc = document.getElementById('incomming');
+            var wsImpl = window.WebSocket || window.MozWebSocket;
+            var input = document.getElementById('sendText');
+            var sendButton = document.getElementById('sendButton');
+            sendButton.setAttribute("onclick", "send()");
+            
+
+            //inc.innerHTML += "connecting to server ..\n";
+
+            // create a new websocket and connect
+            window.ws = new wsImpl('ws://localhost:8181/');
+
+            // when data is comming from the server, this metod is called
+            ws.onmessage = function (evt) {
+                inc.innerHTML += evt.data + '\n';
+            };
+
+            // when the connection is established, this method is called
+            ws.onopen = function () {
+                //inc.innerHTML += '.. connection open\n';
+            };
+
+            // when the connection is closed, this method is called
+            ws.onclose = function () {
+                //inc.innerHTML += '.. connection closed<br/>';
+            }
+            
+           
+            
+            
+            
+            
+
+			// form.addEventListener('submit', function(e){
+            //     alert();
+			// 	e.preventDefault();
+			// 	var val = input.value;
+			// 	var sendStr = "{\"username\":\"" + @ViewBag.username
+            //                 + "\",\"nickname\":\"" + @ViewBag.nickname
+            //                 + "\",\"content\":\"" + val
+            //                 + "\"}";
+			// 	ws.send(sendStr);
+			// 	input.value = "";
+			// });
+
+        }
+        window.onload = start;
+    </script>
+</head>
+
+
+<body>
+    
+    
+    <header class="am-topbar admin-header" style="background-color: #1E5B94">
+        <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+        <div class="am-collapse am-topbar-collapse am-u-md-6" id="topbar-collapse">
+            <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-middle admin-header-list">
+                <li>
+                    <a href="UserPage">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            主页
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Text">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            朋友圈
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../Album/Gallery">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            相册
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../Topic/Index">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            话题
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Chatroom">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            多人聊天室
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="PeopleAround" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                        <span class="am-icon-man-o">
+                            附近的人
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#friend-side-bar" data-am-offcanvas>
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            小伙伴们
+                        </span>
+                    </a>
+                </li>
+
+            </ul>
+            <form class="am-topbar-form am-u-md-4 am-u-sm-10">
+                <div class="">
+                    <div class="am-input-group am-input-group-primary">
+                        <span class="am-input-group-btn">
+                            <a href="Search"><button class="am-btn am-btn-primary search-button" type="button"><span class="am-icon-search"></span></button></a>
+                        </span>
+                    </div>
+                </div>
+            </form>
+
+
+
+        </div>
+
+
+    </header>
+    
+
+
+
+<div class = "chat-dialog">
+  <div align = center class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+    <textarea id="incomming" class = "textarea am-u-sm-8 am-u-md-8 am-u-lg-8" rows=15></textarea>
+    <textarea readonly class = "list am-u-sm-4 am-u-md-4 am-u-lg-4" rows=15></textarea>
+  </div>
+
+  <form id="sendForm">
+  <div align=center class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+    <input id="sendText" class = "comment am-u-sm-10 am-u-md-10 am-u-lg-10" placeholder = "say something" style="height:50px">
+    <button id="sendButton" type = "button" class = "am-u-sm-2 am-u-md-2 am-u-lg-2 am-btn am-btn-primary am-btn-sm sendbutton" style="height:50px">Send!</button>
+  </div>
+  </form>
+</div>
+
+<footer>
+  <br/>
+  <hr>
+  <p class="am-padding-left" align=center>fakebook Tongji</p>
+</footer>
+
+
+</body>
+</html>

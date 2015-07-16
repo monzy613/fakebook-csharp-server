@@ -1,0 +1,134 @@
+﻿<!doctype html>
+<html class="no-js">
+<head>
+    @using fakebook.Models
+    @model photoComment
+    <meta charset="UTF-8">
+    <title>Text | FakeBook</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <!--link rel="alternate icon" type="image/png" href="assets/i/favicon.png"-->
+    <link rel="stylesheet" href="@Url.Content("~/Assets/css/amazeui.min.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Assets/css/admin.css")" />
+    <style>
+        .header {
+            text-align: center;
+        }
+
+            .header h1 {
+                font-size: 200%;
+                color: #333;
+                margin-top: 30px;
+            }
+
+            .header p {
+                font-size: 14px;
+            }
+
+        #borderColorCorner {
+            border: 10px solid #dedede;
+        }
+
+        padding: 15px 25px; 　　 height: inherit; 　　 width: 590px; 　　
+        }
+    </style>
+</head>
+<body>
+    <header class="am-topbar admin-header" style="background-color: #1E5B94">
+        <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+        <div class="am-collapse am-topbar-collapse am-u-md-6" id="topbar-collapse">
+            <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-middle admin-header-list">
+                <li>
+                    <a href="../Account/UserPage">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            主页
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../Account/Text">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            朋友圈
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../Album/Gallery">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            相册
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../Topic/Index">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            话题
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../Account/Chatroom">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            多人聊天室
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../Account/PeopleAround" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                        <span class="am-icon-man-o">
+                            附近的人
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#friend-side-bar" data-am-offcanvas>
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            小伙伴们
+                        </span>
+                    </a>
+                </li>
+
+            </ul>
+            <form class="am-topbar-form am-u-md-4 am-u-sm-10">
+                <div class="">
+                    <div class="am-input-group am-input-group-primary">
+                        <span class="am-input-group-btn">
+                            <a href="Search"><button class="am-btn am-btn-primary search-button" type="button"><span class="am-icon-search"></span></button></a>
+                        </span>
+                    </div>
+                </div>
+            </form>
+
+
+
+        </div>
+
+
+    </header>
+
+    <div align="center"><img src=@ViewData["photoAddress"] /></div>
+    <div align="center" class="comment-submit">
+        <form class="am-collapse am-topbar-collapse " id="statefield-collapse" method="post">
+            <textarea name="state" class="stateArea am-u-sm-12" rows="5" cols="50" id="state" placeholder="say something"></textarea>
+            <input type="submit" class="statesendbutton modify-button am-btn am-btn-primary am-u-sm-12" value="send">
+        </form>
+    </div>
+    <div class="container">
+        <div class="row col-sm-12">
+            @foreach (photoComment i in (ViewData["comment"] as List<photoComment>))
+            {
+
+                <div class="col-sm-12" align="center">
+                    <p>发表时间：@i.photoComment_date</p>
+                    <div style="width: 1080px; height:200px; border: ridge; font-size: 20px" cols="50" ; rows="2">@i.content</div>
+                    <p>评论者：@i.userName</p>
+                    <hr />
+                </div>
+            }
+        </div>
+
+</body>
+</html>

@@ -1,0 +1,301 @@
+﻿<!doctype html>
+<html class="no-js">
+<head>
+    @using fakebook.Models
+    @model SearchModel
+    <meta charset="UTF-8">
+    <title>Text | FakeBook</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <!--link rel="alternate icon" type="image/png" href="assets/i/favicon.png"-->
+    <link rel="stylesheet" href="@Url.Content("~/Assets/css/amazeui.min.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Assets/css/admin.css")" />
+    <style>
+        .header {
+            text-align: center;
+        }
+
+            .header h1 {
+                font-size: 200%;
+                color: #333;
+                margin-top: 30px;
+            }
+
+            .header p {
+                font-size: 14px;
+            }
+
+        #borderColorCorner {
+            border: 10px solid #dedede;
+        }
+
+          padding: 15px 25px; 　　 height: inherit; 　　 width: 590px; 　　
+        }
+    </style>
+</head>
+<body>
+    <header class="am-topbar admin-header" style="background-color: #1E5B94">
+        <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+        <div class="am-collapse am-topbar-collapse am-u-md-6" id="topbar-collapse">
+            <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-middle admin-header-list">
+                <li>
+                    <a href="UserPage">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            主页
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Text">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            朋友圈
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../Album/Gallery">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            相册
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../Topic/Index">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            话题
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Chatroom">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            多人聊天室
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="PeopleAround" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                        <span class="am-icon-man-o">
+                            附近的人
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#friend-side-bar" data-am-offcanvas>
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            小伙伴们
+                        </span>
+                    </a>
+                </li>
+
+            </ul>
+            <form class="am-topbar-form am-u-md-4 am-u-sm-10">
+                <div class="">
+                    <div class="am-input-group am-input-group-primary">
+                        <span class="am-input-group-btn">
+                            <a href="Search"><button class="am-btn am-btn-primary search-button" type="button"><span class="am-icon-search"></span></button></a>
+                        </span>
+                    </div>
+                </div>
+            </form>
+
+
+
+        </div>
+
+
+    </header>
+    <!--TEST start-->
+    <!--TEST end-->
+
+    <div class="am-cf admin-main">
+        <!-- content start -->
+        <div class="admin-content">
+            <div class="am-cf am-padding">
+                <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">查找用户</strong> / <small>Find</small></div>
+                <hr />
+
+                <div class="am-fr am-cf">
+                    <input type="button" class="statebutton modify-button am-btn am-btn-primary am-fr am-show-sm-only" value="State"
+                           data-am-collapse="{target: '#statefield-collapse'}">
+                </div>
+
+
+                <div class="am-fl am-cf am-u-sm-12" align="center">
+                    @*<strong class="am-text-primary am-text-lg">查找方式：</strong>*@
+                    <form name="myform" method="post" action="Search">
+                        <select name="type">
+                            <option value="username">用户名</option>
+                            <option value="nickname">昵称</option>
+                            <option value="gender">性别</option>
+                        </select>
+                        <input type="text" name="information" value="" required placeholder="请输入查找信息" />
+                        <input type="submit" class="am-btn-primary" value="确定" />
+                    </form>
+                </div>
+                <div class="am-fl am-cf am-u-sm-12" align="center" style="margin-top:40px">
+
+                    <table width="800">
+                        <tr>
+                            <td width="200"><strong class="am-text-primary am-text-md">用户名</strong></td>
+                            <td width="200"><strong class="am-text-primary am-text-md">昵称</strong></td>
+                            <td width="200"><strong class="am-text-primary am-text-md">性别</strong></td>
+                            <td width="200"><strong class="am-text-primary am-text-md">添加好友</strong></td>
+                        </tr>
+                        @if (ViewData["find"] != null)
+                        {
+                            foreach (SearchModel i in (ViewData["find"] as List<SearchModel>))
+                            {
+                                <tr>
+                                    <td width="200">@i.username</td>
+                                    <td width="200">@i.nickname</td>
+                                    <td width="200">@i.gender</td>
+                                    @if (@i.beFriend == false)
+                                    {
+                                        <td width="200"><a href="/Account/Add?friendname=@i.username">添加为好友</a></td>
+                                    }
+                                    @if (@i.beFriend == true)
+                                    {
+                                        <td width="200"><a href="#" style="color:#808080" onclick="javascript:void(0);">已添加为好友</a></td>
+                                    }
+                                </tr>
+                            }
+                        }
+                    </table>
+
+                </div>
+
+                <!--button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button-->
+
+            </div>
+            <hr />
+
+            <div class="am-u-md-12">
+                <ul class="am-comments-list" id="searchlist"></ul>
+            </div>
+
+            <hr />
+        </div>
+        <!-- content end -->
+    </div>
+    <!-- <a class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a> -->
+    <footer>
+        <br />
+        <hr>
+        <p class="am-padding-left" align=center>fakebook Tongji</p>
+    </footer>
+    <!--[if lt IE 9]>
+    <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+    <script src="assets/js/polyfill/rem.min.js"></script>
+    <script src="assets/js/polyfill/respond.min.js"></script>
+    <script src="assets/js/amazeui.legacy.js"></script>
+    <![endif]-->
+    <!--[if (gte IE 9)|!(IE)]><!-->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/amazeui.min.js"></script>
+    <!--<![endif]-->
+    <script src="assets/js/app.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+        var socket = io();
+        var search_result = [];
+        socket.on('connect', function () {
+            socket.emit('getSearchRequest', { some: "search" });
+        });
+
+        socket.on('getSearchResultFromServer', function (data) {
+            console.log(data);
+            search_result = data;
+            initFoundList();
+        });
+
+
+        /*
+                    <li class="am-g am-u-md-3 am-u-end">
+
+                      div1  <div class="am-panel am-panel-default am-cf">
+                        div2  <div class="am-panel-bd">
+                          img  <img class="am-img-circle am-img-thumbnail" src="head_imgs/head_test.png" alt=""/>
+                          h3   <h3 class="am-panel-title am-u-md-12" >monzy613</h3>
+                        </div>
+
+                       div3 <div class="am-panel-bd">
+                          div4<div class="am-panel">
+                            btn<button class="modify-button am-btn am-btn-primary am-u-md-12">加为好友</button>
+                          </div>
+                        </div>
+                      </div>
+
+                    </li>
+
+        */
+
+
+        function addResultList(nickname, _id, headImage, number) {
+            td = document.getElementById('searchlist');
+            var liObj = document.createElement('li');
+            if ((number + 1) % 4 !== 0 && ((number + 1) === (search_result.length))) {
+                liObj.setAttribute('class', 'am-g am-u-sm-4 am-u-md-3 am-u-end');
+            } else {
+                liObj.setAttribute("class", 'am-g am-u-sm-4 am-u-md-3');
+            }
+            var div1 = document.createElement('div');
+            div1.setAttribute('class', 'am-panel am-panel-default am-cf');
+            var div2 = document.createElement('div');
+            div2.setAttribute('clas', 'am-panel-bd');
+            var img = document.createElement('img');
+            img.setAttribute('class', 'am-img-circle am-img-thumbnail');
+            img.setAttribute('src', headImage);
+            img.setAttribute('alt', "");
+
+            var span = document.createElement('span');
+            span.setAttribute('class', 'am-u-md-6 am-u-sm-centered am-u-end');
+            span.innerText = nickname;
+
+            var div3 = document.createElement('div');
+            div3.setAttribute('class', 'am-panel-bd am-u-sm-centered');
+            var div4 = document.createElement('div');
+            div4.setAttribute('class', 'am-panel');
+            var btn = document.createElement('button');
+            btn.setAttribute('class', 'modify-button am-btn am-btn-primary am-u-sm-12 am-padding-vertical-xs');
+            btn.setAttribute('data-id', _id);
+            btn.setAttribute('data-nickname', nickname);
+            btn.setAttribute('onclick', "addButtonPressed(this)");
+            btn.innerText = "加为好友";
+
+            div4.appendChild(btn);
+            div3.appendChild(div4);
+
+            div2.appendChild(img);
+            div2.appendChild(span);
+            div1.appendChild(div2);
+            div1.appendChild(div3);
+
+            liObj.appendChild(div1);
+            td.appendChild(liObj)
+        }
+
+        function addButtonPressed(pressedBtn) {
+            var id = pressedBtn.getAttribute('data-id');
+            var nickname = pressedBtn.getAttribute('data-nickname');
+            $.post('/friendAdder', { user_id: id, user_nickname: nickname }, function (data) { console.log("addFriend: " + data); });
+            alert('已向' + pressedBtn.getAttribute('data-id') + '申请好友');
+        }
+
+
+        function initFoundList() {
+            for (var i = 0; i < search_result.length; i++) {
+                addResultList(search_result[i].nickname, search_result[i]._id, 'head_imgs/head_test.png', i);
+            }
+        }
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+﻿<!doctype html>
+<html class="no-js">
+<head>
+    @using fakebook.Models
+    @model FriendModel
+    <meta charset="UTF-8">
+    <title>Text | FakeBook</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <!--link rel="alternate icon" type="image/png" href="assets/i/favicon.png"-->
+    <link rel="stylesheet" href="@Url.Content("~/Assets/css/amazeui.min.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Assets/css/admin.css")" />
+    <style>
+        .header {
+            text-align: center;
+        }
+
+            .header h1 {
+                font-size: 200%;
+                color: #333;
+                margin-top: 30px;
+            }
+
+            .header p {
+                font-size: 14px;
+            }
+
+        #borderColorCorner {
+            border: 10px solid #dedede;
+        }
+
+        padding: 15px 25px; 　　 height: inherit; 　　 width: 590px; 　　
+        }
+    </style>
+</head>
+<body>
+    <header class="am-topbar admin-header" style="background-color: #1E5B94">
+        <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+        <div class="am-collapse am-topbar-collapse am-u-md-6" id="topbar-collapse">
+            <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-middle admin-header-list">
+                <li>
+                    <a href="../Account/UserPage">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            主页
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../Account/Text">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            朋友圈
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../Album/Gallery">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            相册
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Index">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            话题
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../Account/Chatroom">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            多人聊天室
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../Account/PeopleAround" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                        <span class="am-icon-man-o">
+                            附近的人
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#friend-side-bar" data-am-offcanvas>
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            小伙伴们
+                        </span>
+                    </a>
+                </li>
+
+            </ul>
+            <form class="am-topbar-form am-u-md-4 am-u-sm-10">
+                <div class="">
+                    <div class="am-input-group am-input-group-primary">
+                        <span class="am-input-group-btn">
+                            <a href="Search"><button class="am-btn am-btn-primary search-button" type="button"><span class="am-icon-search"></span></button></a>
+                        </span>
+                    </div>
+                </div>
+            </form>
+
+
+
+        </div>
+
+
+    </header>
+    <div class="am-cf am-padding">
+        <div class="am-fl am-cf">
+            <strong class="am-text-primary am-text-lg">个人资料</strong> / <small>Personal information</small>
+        </div>
+        <button class="am-btn am-btn-success am-fr">@Html.ActionLink("new topic", "newtopic", "Topic")</button>
+    </div>
+    <hr />
+    <style>
+        #topic:hover {
+            background-color: Highlight;
+        }
+
+        #title {
+            color: chartreuse;
+        }
+    </style>
+    <script type="text/javascript">
+        function getintopic(id){//获取当前话题的id然后进入话题界面
+            console.log(id);
+            window.location.href="/Topic/selecttopic?id="+id;
+        }
+    </script>
+
+
+
+    <div class="am-u-sm-2 am-u-sm-offset-2">
+        <h2 id="title">Topic</h2>
+    </div>
+    <br />
+    <br />
+    <div>
+        @foreach (fakebook.Models.Topic tp in (ViewData["topics"] as List<fakebook.Models.Topic>))
+        {
+            <div class="am-u-sm-8 am-u-sm-centered">
+                <div class="am-panel am-panel-warning" onclick="getintopic(@tp.Topic_id)">
+                    <div class="am-panel-hd">
+                        @tp.Topic_name
+                        <span class="am-badge am-badge-warning am-radius am-margin-left-lg">@tp.Topic_view</span>
+                        <time>@tp.showdate</time>
+                    </div>
+                    <div id="topic" class="am-panel-bd">
+                        @tp.Topic_Content
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <hr />
+    <div>
+        <ul class="am-pagination am-pagination-centered">
+            @{int c = Int32.Parse(ViewData["current"].ToString());
+            int pre = c - 1;
+            int next = c + 1;
+            int all = Int32.Parse(ViewData["pages"].ToString());
+            }
+            @if (c == 1)//第一页没有前一页
+            {
+
+            }
+            else
+            {
+                <li><a href="/Topic/Index?change=@pre">&laquo; Pre</a></li>
+            }
+            @for (int i = 1; i <= all; i++)
+            {
+                if (i == c)
+                {
+                    <li class="am-active"><a href="/Topic/Index?change=@i">@i</a></li>
+                }
+                else
+                {
+                    <li><a href="/Topic/Index?change=@i">@i</a></li>
+                }
+            }
+            @if (c == all)//最后一页没有后一页
+            {
+
+            }
+            else
+            {
+                <li><a href="/Topic/Index?change=@next">Next &raquo;</a></li>
+            }
+        </ul>
+    </div>
+
+    <hr />

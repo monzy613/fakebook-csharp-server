@@ -1,0 +1,9 @@
+﻿
+@{
+    ViewBag.Title = "ShowPic";
+}
+<h2>ShowPic</h2>
+@{ 
+    string path = TempData["picturesrc"].ToString();
+}
+<img src="@path"/>

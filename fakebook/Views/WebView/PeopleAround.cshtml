@@ -1,0 +1,562 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  @using fakebook.Models
+  @model FriendModel
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Amaze UI Admin user Examples</title>
+  <meta name="description" content="这是一个 user 页面">
+  <meta name="keywords" content="user">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--  <link rel="icon" type="image/png" href="assets/i/favicon.png">-->
+<!--  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">-->
+  <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+<!--  <link rel="stylesheet" href="assets/css/amazeui.min.css"/>-->
+<!--  <link rel="stylesheet" href="assets/css/admin.css">-->
+    <link rel="stylesheet" href="@Url.Content("~/Assets/css/amazeui.min.css")" />
+</head>
+<body>
+<!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+  以获得更好的体验！</p>
+<![endif]-->
+
+<header class="am-topbar admin-header">
+  <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+
+  <div class="am-collapse am-topbar-collapse am-u-md-6" id="topbar-collapse">
+
+    <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-middle admin-header-list">
+
+      <li>
+        <a>
+          <span class="am-icon-man-o">
+            主页
+          </span>
+        </a>
+      </li>
+
+      <li>
+        <a href="/state">
+          <span class="am-icon-man-o">
+            状态
+          </span>
+        </a>
+      </li>
+
+      <li>
+        <a href="/gallery">
+          <span class="am-icon-man-o">
+            相册
+          </span>
+        </a>
+      </li>
+
+      <li>
+        <a href="Chatroom">
+          <span class="am-icon-man-o">
+            多人聊天室
+          </span>
+        </a>
+      </li>
+
+      <li>
+        <a href="PeopleAround">
+          <span class="am-icon-man-o">
+            附近的人
+          </span>
+        </a>
+      </li>
+
+      <li>
+        <a href="#friend-side-bar" data-am-offcanvas>
+          <span class="am-icon-man-o">
+            小伙伴们
+          </span>
+        </a>
+      </li>
+
+
+
+    </ul>
+    <form action="/search" method="post" class="am-topbar-form am-u-md-4 am-u-sm-10">
+    <div class="">
+      <div class="am-input-group am-input-group-primary">
+          <span class="am-input-group-btn">
+            <a href="Search"><button class="am-btn am-btn-primary search-button" type="button"><span class="am-icon-search"></span></button></a>
+          </span>
+      </div>
+    </div>
+    </form>
+
+
+    <div class="am-topbar-right">
+      <div class="am-dropdown" data-am-dropdown="{boundary: '.am-topbar'}">
+        <button class="am-btn am-btn-secondary am-topbar-btn am-btn-sm am-dropdown-toggle" data-am-dropdown-toggle>通知 <span class="am-icon-caret-down"></span></button>
+        <ul class="am-dropdown-content notificationList">
+          <li class="am-dropdown-header">通知</li>
+          <li><a href="/friendManagement">处理好友请求</a></li>
+        </ul>
+      </div>
+    </div>
+
+      
+
+
+  </div>
+
+
+
+
+</header>
+
+<!--TEST start-->
+
+<!--TEST end-->
+
+
+<div class="am-cf admin-main am-u-sm-centered">
+
+  <!-- content start -->
+  <div class="admin-content" id="maindiv">
+
+
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">个人资料</strong> / <small>Personal information</small></div>
+    </div>
+    <hr/>
+
+    <div class="am-g">
+
+
+      <!--head img start-->
+      <div class="am-u-sm-12 am-u-md-3">
+        <div class="am-panel am-panel-default">
+          <div class="am-panel-bd">
+            <div class="am-g">
+              <div class="am-u-md-12">
+                <img class="am-img-circle am-img-thumbnail" src="@Url.Content("~/Assets/Img/headImg.jpg")" alt=""/>
+              </div>
+              <div align=center class="am-badge am-badge-secondary">
+                <%=nickname%>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--head img end-->
+
+
+
+
+
+
+      <div class="am-u-sm-12 am-u-md-8">
+
+
+
+          <div class="am-form-group">
+            <label for="name" class="am-u-sm-3 am-form-label">姓名 / Name</label>
+            <div class="am-u-sm-9">
+              <label class="am-form-label"><%=nickname%></label>
+            </div>
+          </div>
+
+
+          <div class="am-form-group">
+            <label for="user-email" class="am-u-sm-3 am-form-label">电子邮件 / Email</label>
+            <div class="am-u-sm-9">
+              <label class="am-form-label"><%=email%></label>
+            </div>
+          </div>
+
+
+          <div class="am-form-group">
+            <label for="user-QQ" class="am-u-sm-3 am-form-label">QQ</label>
+            <div class="am-u-sm-9">
+              <label class="am-form-label"><%=qq%></label>
+            </div>
+          </div>
+
+
+
+
+<!--           <div class="am-form-group">
+            <div class="am-u-sm-9 am-u-sm-push-3">
+              <button type="button" class="modify-button am-btn am-btn-primary am-fr">Login</button>
+            </div>
+          </div> -->
+
+        </div>
+
+
+
+
+
+
+
+
+      <!-- 侧边栏内容 -->
+      <div id="friend-side-bar" class="am-offcanvas">
+        <div class="am-offcanvas-bar">
+          <div class="am-offcanvas-content">
+            <ul class="am-list" id="friendlist">
+              @if(ViewData["friendList"] != null) {
+                foreach (FriendModel i in (ViewData["friendList"] as List<FriendModel>)){
+                  
+                  <li>
+                    <div class="am-u-sm-12 am-panel">
+                      <div class="am-panel-bd am-u-sm-6">
+                        <div class="am-g">
+    
+                          <div class="am-u-md-12">
+                            <img class="am-img-circle am-img-thumbnail" src="@Url.Content("~/Assets/Img/headImg.jpg")" alt=""/>
+                          </div>
+                          <div class="am-badge am-badge-secondary am-u-centered">
+                            @i.nickname
+                          </div>
+    
+                        </div>
+                      </div>
+                      <div class="buttongroup am-u-sm-6 am-panel-bd">
+                        <button class="am-u-sm-12 am-btn am-btn-primary am-margin-bottom">唠嗑</button>
+                        <button class="am-u-sm-12 am-btn am-btn-danger">友尽</button>
+                      </div>
+                    </div>
+                  </li>                  
+                  
+                  
+                  
+                }
+              }
+              
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  <!-- content end -->
+  </div>
+</div>
+
+<!-- <a class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a> -->
+
+<footer class="footer">
+  <br/>
+  <hr>
+  <p class="am-padding-left" align=center>fakebook Tongji</p>
+</footer>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="assets/js/polyfill/rem.min.js"></script>
+<script src="assets/js/polyfill/respond.min.js"></script>
+<script src="assets/js/amazeui.legacy.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="@Url.Content("~/Assets/js/jquery.min.js")"></script>
+<script src="@Url.Content("~/Assets/js/amazeui.min.js")"></script>
+<script src="@Url.Content("~/Assets/js/app.js")"></script>
+<!--<![endif]-->
+
+<script>
+//var socket = io ();
+// var currentChatID = 'monzy123';
+
+// socket.on ('connect', function () {
+//   socket.emit ('getFriendList', {some: 'friendList'});
+// });
+
+// socket.on ('getFriendListFromServer', function (data) {
+//   friends = data;
+//   if (friends.length === 0) {
+
+//   } else {
+//     initFriendList ();
+//   }
+// });
+
+
+// socket.on ('getMessage-<%=username%>', function (data) {
+//     var msg = data.from_id + ': ' + data.msg;
+//     console.log (data);
+
+//     if (data.from_id === '<%=username%>') {
+//       if ($('.chatarea-' + data.to_id).val () !== '') {
+//         $('.chatarea-' + data.to_id).val ($('.chatarea-' + data.to_id).val() + '\n' + msg);
+//       } else {
+//         $('.chatarea-' + data.to_id).val (msg);
+//       }
+//     } else if (data.to_id === '<%=username%>') {
+//       if ($('.chatarea-' + data.from_id).val () !== '') {
+//         $('.chatarea-' + data.from_id).val ($('.chatarea-' + data.from_id).val() + '\n' + msg);
+//       } else {
+//         $('.chatarea-' + data.from_id).val (msg);
+//       }
+//     }
+// });
+
+
+
+
+
+
+
+/*
+              <li>
+                <div class="am-u-sm-12 am-panel">
+                  <div class="am-panel-bd am-u-sm-6">
+                    <div class="am-g">
+
+                      <div class="am-u-md-12">
+                        <img class="am-img-circle am-img-thumbnail" src="head_imgs/<%=head_img_name%>" alt=""/>
+                      </div>
+                      <div class="am-badge am-badge-secondary am-u-centered">
+                        <%=username%>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="buttongroup am-u-sm-6 am-panel-bd">
+                    <button class="am-u-sm-12 am-btn am-btn-primary am-margin-bottom">唠嗑</button>
+                    <button class="am-u-sm-12 am-btn am-btn-danger">友尽</button>
+                  </div>
+                </div>
+              </li>
+*/
+
+
+
+// function addFriendList (friend, headImg) {
+//   td = document.getElementById('friendlist');
+//   var li = document.createElement('li');
+
+//   var div = document.createElement('div');
+//   div.setAttribute('class', 'am-u-sm-12 am-panel');
+
+//   var div1 = document.createElement('div');
+//   div1.setAttribute('class', 'am-panel-bd am-u-sm-6');
+
+//   var div11 = document.createElement('div');
+//   div11.setAttribute('class', 'am-g');
+
+//   var div111 = document.createElement('div');
+//   div111.setAttribute('class', 'am-u-sm-12');
+
+//   var img = document.createElement('img');
+//   img.setAttribute('class', 'am-img-circle am-img-thumbnail');
+//   img.setAttribute('src', headImg);
+
+//   var div112 = document.createElement('div');
+//   div112.setAttribute('class', 'am-badge am-badge-secondary am-u-centered');
+//   div112.innerHTML = friend.nickname;
+
+//   var div2 = document.createElement('div');
+//   div2.setAttribute('class', 'am-u-sm-6 am-panel-bd');
+
+//   var chatButton = document.createElement('button');
+//   chatButton.setAttribute('class', 'am-u-sm-12 am-btn am-btn-primary am-margin-bottom');
+//   chatButton.setAttribute('data-id', friend._id);
+//   chatButton.setAttribute('data-nickname', friend.nickname);
+//   //chatButton.setAttribute('data-am-modal', '{target: "#doc-modal-chatwindow-' + friend.nickname +  '", closeViaDimmer: 0, width: 400, height: 225}');
+//   chatButton.setAttribute('onclick', 'initChat(this)');
+//   chatButton.innerHTML = "聊天";
+
+//   var deleteFriendButton = document.createElement('button');
+//   deleteFriendButton.setAttribute('class', 'am-u-sm-12 am-btn am-btn-danger');
+//   deleteFriendButton.setAttribute('data-id', friend._id);
+//   deleteFriendButton.setAttribute('data-nickname', friend.nickname);
+//   deleteFriendButton.innerHTML = "删除";
+
+//   div2.appendChild(chatButton);
+//   div2.appendChild(deleteFriendButton);
+
+//   div111.appendChild(img);
+
+//   div11.appendChild(div111);
+//   div11.appendChild(div112);
+
+//   div1.appendChild(div11);
+
+//   div.appendChild(div1);
+//   div.appendChild(div2);
+
+//   li.appendChild(div);
+//   td.appendChild(li);
+// }
+
+
+// function initFriendList () {
+  
+//   for (var i in friends) {
+//     addFriendList (friends[i], 'http://imgsrc.baidu.com/forum/pic/item/e51035fae6cd7b89c77d56fd0d2442a7d9330e55.jpg');
+//   }
+// }
+
+
+
+
+
+
+
+/*
+div<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-chatwindow-monzy123">
+  div1<div class="am-modal-dialog">
+    div11<div class="am-modal-hd">
+      <small>monzy613</small>
+      <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+    </div>
+    div12<div class="am-modal-bd am-cf">
+      div121<div class="am-u-sm-12">
+        <textarea class="chatarea am-u-sm-12" rows="5">nothing</textarea>
+        <input type=text class="am-u-sm-10 am-margin-top-xs" style="height:30px">
+        <button class="am-u-sm-2 am-btn am-btn-primary am-margin-top-xs" style="height:30px"  onclick="send()">Go</button>
+      </div>
+    </div>
+  </div>
+</div>
+*/
+
+
+// function send (friendID) {
+//   var msg = $('.msgarea-' + friendID).val();
+//   $('.msgarea-' + friendID).val('');
+//   var send_package = {
+//     friendID: friendID,
+//     msg: msg
+//   };
+//   $.post ('/p2pchat', send_package);
+//   console.log ('send to ' + friendID + " " + send_package.msg);
+// }
+
+
+
+
+
+
+/*
+<button class="am-btn am-btn-danger" data-am-modal="{target: '#my-popup'}">Popup</button>
+<div class="am-popup" id="my-popup">
+  <div class="am-popup-inner">
+    <div class="am-popup-hd">
+      <h4 class="am-popup-title">...</h4>
+      <span data-am-modal-close
+            class="am-close">&times;</span>
+    </div>
+    <div class="am-popup-bd">
+      ...
+    </div>
+  </div>
+</div>
+*/
+
+
+// function initChat(btn) {
+//   var friendID = btn.getAttribute('data-id');
+//   currentChatID = friendID;
+//   console.log ('new chat with ' + currentChatID);
+//   btn.setAttribute('data-am-modal', '{target: "#doc-modal-chatwindow-' + friendID +  '", closeViaDimmer: 0, width: 400, height: 225}');
+
+//   tm = document.getElementById('maindiv');
+
+//   var div = document.createElement('div');
+//   div.setAttribute('class', 'am-popup am-modal-no-btn');
+//   div.setAttribute('tabindex', '-1');
+//   div.setAttribute('id', 'doc-modal-chatwindow-' + friendID);
+
+//   var div1 = document.createElement('div');
+//   div1.setAttribute('class', 'am-popup-inner');
+
+//   var div11 = document.createElement('div');
+//   div11.setAttribute('class', 'am-popup-hd');
+
+
+
+
+
+//   var h4 = document.createElement('h4');
+//   h4.setAttribute('class', 'am-popup-title');
+//   h4.innerHTML = friendID;
+
+//   var small = document.createElement('small');
+//   small.innerHTML = friendID;
+
+//   var close = document.createElement('span');
+//   close.setAttribute('data-am-modal-close', '');
+//   close.setAttribute('class', 'am-close');
+//   close.setAttribute('onclick', 'deleteChatWith("' + friendID + '")');
+//   close.innerHTML = '&times;';
+
+
+//   var div12 = document.createElement('div');
+//   div12.setAttribute('class', 'am-popup-bd');
+
+//   var div121 = document.createElement('div');
+//   div121.setAttribute('class', 'am-u-sm-12');
+
+//   var chatarea = document.createElement('textarea');
+//   chatarea.setAttribute('class', 'am-u-sm-12 am-margin-top-sm chatarea-' + friendID);
+//   chatarea.setAttribute('rows', '20');
+
+//   var input = document.createElement('input');
+//   input.setAttribute('type', 'text');
+//   input.setAttribute('class', 'am-u-sm-10 am-margin-top-xs msgarea-' + friendID);
+//   input.setAttribute('style', 'height:40px');
+
+//   var sendBtn = document.createElement('button');
+//   sendBtn.setAttribute('class', 'am-u-sm-2 am-btn am-btn-primary am-margin-top-xs');
+//   //sendBtn.setAttribute('style', 'height:30px');
+//   sendBtn.setAttribute('onclick', 'send("' + friendID + '")');
+//   sendBtn.innerHTML = 'Go';
+
+//   div11.appendChild(h4);
+//   div11.appendChild(close);
+
+//   div121.appendChild(chatarea);
+//   div121.appendChild(input);
+//   div121.appendChild(sendBtn);
+
+//   div12.appendChild(div121);
+
+//   div1.appendChild(div11);
+//   div1.appendChild(div12);
+
+//   div.appendChild(div1);
+//   tm.appendChild(div);
+// }
+
+
+
+// function deleteChatWith (friendID) {
+//   tm = document.getElementById('maindiv');
+//   tm.removeChild(document.getElementById('doc-modal-chatwindow-' + friendID));
+// }
+
+// function one(){  
+//     alert("one");  
+// }  
+// function two(){  
+//     alert("two");  
+// }  
+
+
+
+// $('#doc-modal-chatwindow-' + currentChatID).on('closed.modal.amui', function(){
+//   alert (currentChatID + ' chat modal');
+// });
+
+
+
+
+</script>
+</body>
+</html>

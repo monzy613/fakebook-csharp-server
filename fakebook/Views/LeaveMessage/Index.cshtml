@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.3.0/css/amazeui.min.css" />
+<style>
+    #title {
+        color: chartreuse;
+    }
+</style>
+<hr />
+<div class="am-u-sm-2 am-u-sm-offset-3 "style="color:blueviolet">
+   Messages
+</div>
+<br>
+<br />
+<div class="am-u-sm-6 am-u-sm-centered">
+    @if (ViewData["Messages"] != null)
+    {
+        foreach (fakebook.Models.LeaveM tp in (ViewData["Messages"] as List<fakebook.Models.LeaveM>))
+        {
+        <article class="am-comment">
+            <a href="#link-to-user-home">
+                @{ 
+                    string img = "../Portraits/" + tp.userimg;
+                }
+                <img src="@img"+ alt="" class="am-comment-avatar" width="48" height="48" />
+            </a>
+
+            <div class="am-comment-main">
+                <header class="am-comment-hd">
+                    <!--<h3 class="am-comment-title">评论标题</h3>-->
+                    <div class="am-comment-meta">
+                        <a href="#link-to-user" class="am-comment-author">@tp.fromU</a>
+                        留言于 <time datetime="2013-07-27T04:54:29-07:00" title="2013年7月27日 下午7:54 格林尼治标准时间+0800">@tp.showdate</time>
+                    </div>
+                </header>
+
+                <div class="am-comment-bd">
+                    @tp.message
+                </div>
+            </div>
+        </article>
+            <br>
+        }
+      }
+          
+</div>
+<hr />
+<div>
+    <ul class="am-pagination am-pagination-centered">
+        @{int c = Int32.Parse(ViewData["current"].ToString());
+            int pre = c - 1;
+            int next = c + 1;
+            int all = Int32.Parse(ViewData["pages"].ToString());
+        }
+        @if (c == 1)//第一页没有前一页
+        {
+
+        }
+        else
+        {
+            <li><a href="/LeaveMessage/Index?change=@pre">&laquo; Pre</a></li>
+        }
+        @for (int i = 1; i < all; i++)
+        {
+            if (i == c)
+            {
+                <li class="am-active"><a href="/LeaveMessage/Index?change=@i">@i</a></li>
+            }
+            else
+            {
+                <li><a href="/LeaveMessage/Index?change=@i">@i</a></li>
+            }
+        }
+        @if (c == all)//最后一页没有后一页
+        {
+
+        }
+        else
+        {
+            <li><a href="/LeaveMessage/Index?change=@next">Next &raquo;</a></li>
+        }
+    </ul>
+</div>
+
+<hr />
+@* 加入新的留言*@
+<div class="am-collapse am-topbar-collapse" id="statefield-collapse">
+    <span class="statetextarea">
+        <div class="am-u-md-12" align=center>
+            <form method="post" action="SaveMessage">
+                <textarea name="comment" class="stateArea am-u-sm-6 glyphicon-align-center am-u-sm-centered" rows="5" cols="50" id="state" placeholder="say somthing"></textarea>
+                <input type="submit" class="statesendbutton modify-button am-btn am-btn-primary am-u-sm-6 am-u-sm-centered" value="Send">
+            </form>
+        </div>
+    </span>
+</div>

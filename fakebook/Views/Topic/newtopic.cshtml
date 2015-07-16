@@ -1,0 +1,150 @@
+﻿<!doctype html>
+<html class="no-js">
+<head>
+    @using fakebook.Models
+    @model FriendModel
+    <meta charset="UTF-8">
+    <title>Text | FakeBook</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <!--link rel="alternate icon" type="image/png" href="assets/i/favicon.png"-->
+    <link rel="stylesheet" href="@Url.Content("~/Assets/css/amazeui.min.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Assets/css/admin.css")" />
+    <style>
+        .header {
+            text-align: center;
+        }
+
+            .header h1 {
+                font-size: 200%;
+                color: #333;
+                margin-top: 30px;
+            }
+
+            .header p {
+                font-size: 14px;
+            }
+
+        #borderColorCorner {
+            border: 10px solid #dedede;
+        }
+
+        padding: 15px 25px; 　　 height: inherit; 　　 width: 590px; 　　
+        }
+    </style>
+</head>
+<body>
+    <header class="am-topbar admin-header" style="background-color: #1E5B94">
+        <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+        <div class="am-collapse am-topbar-collapse am-u-md-6" id="topbar-collapse">
+            <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-middle admin-header-list">
+                <li>
+                    <a href="../Account/UserPage">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            主页
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../Account/Text">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            朋友圈
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../Album/Gallery">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            相册
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Index">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            话题
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../Account/Chatroom">
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            多人聊天室
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../Account/PeopleAround" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                        <span class="am-icon-man-o">
+                            附近的人
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#friend-side-bar" data-am-offcanvas>
+                        <span class="am-icon-man-o" style="color:#000; font-size: 18px;font-family:'微软雅黑'">
+                            小伙伴们
+                        </span>
+                    </a>
+                </li>
+
+            </ul>
+            <form class="am-topbar-form am-u-md-4 am-u-sm-10">
+                <div class="">
+                    <div class="am-input-group am-input-group-primary">
+                        <span class="am-input-group-btn">
+                            <a href="Search"><button class="am-btn am-btn-primary search-button" type="button"><span class="am-icon-search"></span></button></a>
+                        </span>
+                    </div>
+                </div>
+            </form>
+
+
+
+        </div>
+
+
+    </header>
+
+    <div class="am-cf admin-main">
+        <!-- content start -->
+        <div class="admin-content">
+            <div class="am-cf am-padding">
+                <div class="am-fl am-cf am-u-sm-offset-2"><strong class="am-text-primary am-text-lg">新的话题</strong> / <small>Topic</small></div>
+                <div class="am-fr am-cf">
+                    <input type="button" class="statebutton modify-button am-btn am-btn-primary am-fr am-show-sm-only" value="State"
+                           data-am-collapse="{target: '#statefield-collapse'}">
+                </div>
+                <!--button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button-->
+
+            </div>
+            <hr />
+            <div class="am-collapse am-topbar-collapse" id="statefield-collapse">
+                <span class="statetextarea">
+                    <div class="am-u-md-12" align=center>
+                        <form method="post" action="SaveTopic">
+                            <textarea name="newtopicname" class="stateArea am-u-sm-4 glyphicon-align-center am-u-sm-offset-2" rows="1" cols="50" id="state" placeholder="Give a name!"></textarea>
+                            <br>
+                            <hr>
+                            <textarea name="newtopic" class="stateArea am-u-sm-8 glyphicon-align-center am-u-sm-centered" rows="10" cols="50" id="state" placeholder="Let's start a topic!"></textarea>
+                            <input type="submit" class="statesendbutton modify-button am-btn am-btn-primary am-u-sm-8 am-u-sm-centered" value="Send">
+                        </form>
+                    </div>
+                </span>
+            </div>
+
+            <div class="am-u-md-12">
+                <ul class="am-comments-list" id="statelist"></ul>
+            </div>
+
+            <hr />
+        </div>
+        <!-- content end -->
+    </div>
+    <footer>
+        <hr>
+        <p class="am-padding-left" align=center>fakebook Tongji</p>
+    </footer>

@@ -1,0 +1,275 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Amaze UI Admin user Examples</title>
+  <meta name="description" content="这是一个 user 页面">
+  <meta name="keywords" content="user">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--  <link rel="icon" type="image/png" href="assets/i/favicon.png">-->
+<!--  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">-->
+  <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+<!--  <link rel="stylesheet" href="assets/css/amazeui.min.css"/>-->
+<!--  <link rel="stylesheet" href="assets/css/admin.css">-->
+  <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.3.0/css/amazeui.min.css"/>
+</head>
+<body>
+<!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+  以获得更好的体验！</p>
+<![endif]-->
+
+<header class="am-topbar admin-header">
+  <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+
+  <div class="am-collapse am-topbar-collapse am-u-md-6" id="topbar-collapse">
+
+    <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-middle admin-header-list">
+
+      <li>
+        <a href="/userPage">
+          <span class="am-icon-man-o">
+            主页
+          </span>
+        </a>
+      </li>
+
+      <li>
+        <a href="/state">
+          <span class="am-icon-man-o">
+            状态
+          </span>
+        </a>
+      </li>
+
+      <li>
+        <a href="/gallery">
+          <span class="am-icon-man-o">
+            相册
+          </span>
+        </a>
+      </li>
+
+      <li>
+        <a href="/chat">
+          <span class="am-icon-man-o">
+            多人聊天室
+          </span>
+        </a>
+      </li>
+
+      <li>
+        <a href="/peopleAround">
+          <span class="am-icon-man-o">
+            附近的人
+          </span>
+        </a>
+      </li>
+
+      <li>
+        <a href="#friend-side-bar" data-am-offcanvas>
+          <span class="am-icon-man-o">
+            小伙伴们
+          </span>
+        </a>
+      </li>
+
+
+
+    </ul>
+    <form action="/search" method="post" class="am-topbar-form am-u-md-4 am-u-sm-10">
+    <div class="">
+      <div class="am-input-group am-input-group-primary">
+          <input type="text" class="am-form-field search-field" name="friend" id="friend" placeholder="寻找小伙伴">
+          <span class="am-input-group-btn">
+            <button class="am-btn am-btn-primary search-button" type="submit"><span class="am-icon-search"></span></button>
+          </span>
+      </div>
+    </div>
+    </form>
+
+
+    <div class="am-topbar-right">
+      <div class="am-dropdown" data-am-dropdown="{boundary: '.am-topbar'}">
+        <button class="am-btn am-btn-secondary am-topbar-btn am-btn-sm am-dropdown-toggle" data-am-dropdown-toggle>通知 <span class="am-icon-caret-down"></span></button>
+        <ul class="am-dropdown-content notificationList">
+          <li class="am-dropdown-header">通知</li>
+          <li><a href="/friendManagement">处理好友请求</a></li>
+        </ul>
+      </div>
+    </div>
+
+
+
+  </div>
+
+
+
+
+</header>
+
+
+
+<div class="am-cf admin-main">
+
+  <!-- content start -->
+  <div class="admin-content">
+
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">相册</strong> / <small>Gallery</small></div>
+      <input type="button" class="picture-upload-button am-btn am-btn-primary am-fr" value="新照片" data-am-modal="{target: '#upload-madal', closeViaDimmer: 0, width: 400, height: 225}">
+    </div>
+
+
+
+    <div class="am-modal am-modal-no-btn" tabindex="-1" id="upload-madal">
+      <div class="am-modal-dialog">
+        <div class="am-modal-hd">上传照片
+          <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+        </div>
+        <div class="am-modal-bd">
+          <form action="/galleryUploader" method="post" enctype="multipart/form-data">
+            <input class="am-btn am-btn-primary" type="file" name="" id="uploader">
+            <input type="submit" class="am-btn am-btn-primary upload-comfirm-button">
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <ul class="am-avg-sm-2 am-avg-md-4 am-avg-lg-6 am-margin gallery-list" id="gallery-list">
+    </ul>
+
+
+
+
+<!--     <div class="am-margin am-cf">
+      <hr/>
+      <p class="am-fl">共 15 条记录</p>
+      <ol class="am-pagination am-fr">
+        <li class="am-disabled"><a href="#">&laquo;</a></li>
+        <li class="am-active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">&raquo;</a></li>
+      </ol>
+    </div> -->
+
+  </div>
+  <!-- content end -->
+
+</div>
+
+<footer class="footer">
+  <br/>
+  <hr>
+  <p class="am-padding-left" align=center>fakebook Tongji</p>
+</footer>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="assets/js/polyfill/rem.min.js"></script>
+<script src="assets/js/polyfill/respond.min.js"></script>
+<script src="assets/js/amazeui.legacy.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/amazeui.min.js"></script>
+<!--<![endif]-->
+<script src="assets/js/app.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+var socket = io ();
+socket.on ('connect', function () {
+  socket.emit ('getGallery', {some: 'gallery'});
+});
+var gallery = [];
+
+
+
+
+socket.on ('getGalleryFromServer', function (data) {
+  console.log (data);
+  gallery = data;
+  var tmpArr = [];
+  var prefix = "";
+  if (gallery.length !== 0) {
+    tmpArr = gallery[gallery.length - 1].split('/');
+    prefix = "" + parseInt(tmpArr[tmpArr.length - 1].split('_')[0]) + 1;
+  } else {
+    prefix = "0";
+  }
+  var newFileName = prefix + '_<%=username%>';
+  uploader = document.getElementById('uploader');
+  uploader.setAttribute('name', newFileName);
+  console.log ("newFileName: " + newFileName);
+  initGallery ();
+});
+
+
+/*
+      <li>
+        <a href="#">
+          <img class="am-img-thumbnail am-img-bdrs" src="http://cn.bing.com/az/hprichv/LondonTrainStation_GettyRR_139321755_ZH-CN742316019.jpg" alt=""/>
+          <button class="am-btn am-btn-success am-u-sm-6">imgx</button>
+          <button class="am-btn am-btn-danger am-u-sm-6">删除/del</button>
+        </a>
+      </li>
+*/
+
+
+function delPhoto(photoToDelete) {
+  $.post('/deletePhoto', {photoToDelete: photoToDelete});
+  location.reload(true);
+}
+
+function addPicture (image) {
+  td = document.getElementById('gallery-list');
+  var li = document.createElement('li');
+  var a = document.createElement('a');
+  var img = document.createElement('img');
+  img.setAttribute('class', 'am-img-thumbnail am-img-bdrs am-u-sm-12');
+  img.setAttribute('src', image.imgPath);
+
+  var titleButton = document.createElement('button');
+  titleButton.innerHTML = image.imgName;
+  titleButton.setAttribute('class', 'am-btn am-btn-primary am-u-sm-6');
+
+  var delButton = document.createElement('button');
+  delButton.setAttribute('class', 'am-btn am-btn-danger am-u-sm-6');
+  delButton.setAttribute('onclick', 'delPhoto("' + image.imgPath + '")');
+  delButton.innerHTML = '删除/del';
+
+  a.appendChild(img);
+  a.appendChild(titleButton);
+  a.appendChild(delButton);
+  li.appendChild(a);
+  td.appendChild(li);
+}
+
+
+function extension (filename) {
+  var tmpArr = filename.split ('.');
+  alert (tmpArr[tmpArr.length - 1]);
+}
+
+function initGallery () {
+  for (var i in gallery) {
+    addPicture ({imgPath: gallery[i], imgName: ('img' + i)});
+  }
+}
+
+
+
+</script>
+</body>
+</html>

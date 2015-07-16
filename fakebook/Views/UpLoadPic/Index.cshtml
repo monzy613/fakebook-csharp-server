@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<head runat="server">
+    <title>上传图片</title>
+</head>
+<body>
+    <h2>Picture</h2>
+
+    @using (Html.BeginForm("UpPic", "UpLoadPic",FormMethod.Post,new { enctype = "multipart/form-data" }))
+    {
+        <input type="file" name="picture"/>
+        <input type="submit" value="上传图片"/>
+    }
+
+</body>
